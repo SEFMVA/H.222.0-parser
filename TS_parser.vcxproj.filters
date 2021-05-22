@@ -24,15 +24,21 @@
     <ClCompile Include="xTS_AdaptationField.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xPES_PacketHeader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="xTS_AdaptationField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xPES_PacketHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="tsCommon.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tsTransportStream.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="xTS_AdaptationField.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

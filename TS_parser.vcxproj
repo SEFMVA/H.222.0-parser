@@ -116,11 +116,13 @@
   <ItemGroup>
     <ClCompile Include="tsTransportStream.cpp" />
     <ClCompile Include="TS_parser.cpp" />
+    <ClCompile Include="xPES_PacketHeader.cpp" />
     <ClCompile Include="xTS_AdaptationField.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tsCommon.h" />
     <ClInclude Include="tsTransportStream.h" />
+    <ClInclude Include="xPES_PacketHeader.h" />
     <ClInclude Include="xTS_AdaptationField.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
