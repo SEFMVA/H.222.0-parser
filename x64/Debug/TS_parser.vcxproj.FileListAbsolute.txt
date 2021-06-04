@@ -1,2 +1,0 @@
-C:\Users\SH-PC\Desktop\pdmLab\lab2\TS_parser_Step0\Step0\x64\Debug\TS_parser.exe
-C:\Users\SH-PC\Desktop\pdmLab\lab2\TS_parser_Step0\Step0\x64\Debug\TS_parser.pdb
