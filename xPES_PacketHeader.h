@@ -25,7 +25,8 @@ protected:
 	uint16_t m_PacketLength;
 	bool m_PES_extension_flag;
 	uint8_t	m_PES_header_data_length;
-
+	uint64_t PTS;
+	uint64_t DTS;
 public:
 	void Reset();
 	uint32_t Parse(const uint8_t* Input);

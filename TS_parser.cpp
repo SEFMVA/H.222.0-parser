@@ -6,21 +6,6 @@
 #include "xPES_Assembler.h"
 #include <vector>
 
-bool saveTofile(std::vector<uint8_t> PES, uint32_t PESHeaderLength) {
-    FILE *file = fopen("PID136.mp2","ab");
-    if (file != NULL) {
-        uint8_t *tmp = &PES[0];
-
-        fwrite(tmp + PESHeaderLength, sizeof(uint8_t), PES.size() - PESHeaderLength, file);
-        
-        fclose(file);
-
-        return true;
-    }else{
-        printf("File error");
-    }
-    return false;
-}
 
 int main( int argc, char *argv[ ], char *envp[ ])
 {
@@ -33,6 +18,12 @@ int main( int argc, char *argv[ ], char *envp[ ])
   xPES_Assembler PES_Assembler;
 
   PES_Assembler.Init(136);
+
+  xTS_PacketHeader    TS_PacketHeader2;
+  xTS_AdaptationField TS_AdaptationField2;
+  xPES_Assembler PES_Assembler2;
+
+  PES_Assembler2.Init(174);
 
   uint8_t* TS_PacketBuffer;
   TS_PacketBuffer = (uint8_t*)malloc(sizeof(uint8_t) * xTS::TS_PacketLength);
@@ -54,6 +45,13 @@ int main( int argc, char *argv[ ], char *envp[ ])
     TS_PacketHeader.Parse(TS_PacketBuffer);
 
     TS_AdaptationField.Reset();
+
+
+    TS_PacketHeader2.Reset();
+    TS_PacketHeader2.Parse(TS_PacketBuffer);
+
+    TS_AdaptationField2.Reset();
+
     if (TS_PacketHeader.getSyncByte() == 'G' && TS_PacketHeader.getPID() == 136) {
 
         if (TS_PacketHeader.hasAdaptationField()) TS_AdaptationField.Parse(TS_PacketBuffer, TS_PacketHeader.getAdaptationFieldControl());
@@ -69,15 +67,31 @@ int main( int argc, char *argv[ ], char *envp[ ])
         case xPES_Assembler::eResult::StreamPackedLost: printf("PcktLost "); break;
         case xPES_Assembler::eResult::AssemblingStarted: printf("Started "); PES_Assembler.PrintPESH(); break;
         case xPES_Assembler::eResult::AssemblingContinue: printf("Continue "); break;
-        case xPES_Assembler::eResult::AssemblingFinished: printf("Finished "); printf("PES: PcktLen=%d HeadLen=%d DataLen=%d", PES_Assembler.getNumPacketBytes(), PES_Assembler.getHeaderSize(), PES_Assembler.getNumPacketBytes() - PES_Assembler.getHeaderSize()); saveTofile(PES_Assembler.getPacket(), PES_Assembler.getHeaderSize()); break;
+        case xPES_Assembler::eResult::AssemblingFinished: printf("Finished "); printf("PES: PcktLen=%d HeadLen=%d DataLen=%d", PES_Assembler.getNumPacketBytes(), PES_Assembler.getHeaderSize(), PES_Assembler.getNumPacketBytes() - PES_Assembler.getHeaderSize()); break; // saving to file is in PES assembler
         default: break;
         }
         printf("\n");
     }
 
-    //TODO remove
-    if (TS_PacketId == 33) {
-        int test = 1;
+    if (TS_PacketHeader2.getSyncByte() == 'G' && TS_PacketHeader2.getPID() == 174) {
+
+        if (TS_PacketHeader2.hasAdaptationField()) TS_AdaptationField2.Parse(TS_PacketBuffer, TS_PacketHeader2.getAdaptationFieldControl());
+
+        printf("%010d ", TS_PacketId);
+        TS_PacketHeader2.Print();
+        printf(" ");
+        if (TS_PacketHeader2.hasAdaptationField()) TS_AdaptationField2.Print();
+
+        xPES_Assembler::eResult Result = PES_Assembler2.AbsorbPacket(TS_PacketBuffer, &TS_PacketHeader2, &TS_AdaptationField2);
+        switch (Result)
+        {
+        case xPES_Assembler::eResult::StreamPackedLost: printf("PcktLost "); break;
+        case xPES_Assembler::eResult::AssemblingStarted: printf("Started "); PES_Assembler2.PrintPESH(); break;
+        case xPES_Assembler::eResult::AssemblingContinue: printf("Continue "); break;
+        case xPES_Assembler::eResult::AssemblingFinished: printf("Finished "); printf("PES: PcktLen=%d HeadLen=%d DataLen=%d", PES_Assembler2.getNumPacketBytes(), PES_Assembler2.getHeaderSize(), PES_Assembler2.getNumPacketBytes() - PES_Assembler2.getHeaderSize()); break; // saving to file is in PES assembler
+        default: break;
+        }
+        printf("\n");
     }
 
     TS_PacketId++;
