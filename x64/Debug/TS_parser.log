@@ -1,4 +1,5 @@
 ﻿  TS_parser.cpp
-  xTS_AdaptationField.cpp
+  xPES_Assembler.cpp
+  xPES_PacketHeader.cpp
   Generowanie kodu...
   TS_parser.vcxproj -> C:\Users\SH-PC\Desktop\pdmLab\lab2\TS_parser_Step0\Step0\x64\Debug\TS_parser.exe

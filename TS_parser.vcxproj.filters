@@ -27,6 +27,9 @@
     <ClCompile Include="xPES_PacketHeader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xPES_Assembler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xTS_AdaptationField.h">
@@ -39,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tsTransportStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TS_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xPES_Assembler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

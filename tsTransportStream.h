@@ -67,7 +67,6 @@ public:
   };
 
 protected:
-  //TODO - header fields
     uint8_t SB;
     uint8_t E;
     uint8_t S;
@@ -84,11 +83,14 @@ public:
 
 public:
   //TODO - direct acces to header values
-    uint8_t getAFC();
+    uint8_t getAdaptationFieldControl() const;
+    uint16_t getPID() const;
+    uint8_t getSyncByte() const;
+    uint8_t getContinuityCounter() const;
+    uint8_t getStartIndicator() const;
 
 public:
-  //TODO
-  bool     hasAdaptationField() const { /*TODO*/ }
+    bool     hasAdaptationField() const;
   bool     hasPayload        () const { /*TODO*/ }
 };
 

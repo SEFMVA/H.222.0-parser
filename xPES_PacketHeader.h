@@ -23,9 +23,12 @@ protected:
 	uint32_t m_PacketStartCodePrefix;
 	uint8_t m_StreamId;
 	uint16_t m_PacketLength;
+	bool m_PES_extension_flag;
+	uint8_t	m_PES_header_data_length;
+
 public:
 	void Reset();
-	int32_t Parse(const uint8_t* Input);
+	uint32_t Parse(const uint8_t* Input);
 	void Print() const;
 public:
 	//PES packet header

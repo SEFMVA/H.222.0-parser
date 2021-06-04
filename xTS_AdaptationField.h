@@ -23,5 +23,5 @@ public:
 	void Print() const;
 public:
 	//derrived values
-	uint32_t getNumBytes() const {	}
+	uint32_t getNumBytes() const;
 };

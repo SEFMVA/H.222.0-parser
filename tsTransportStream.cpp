@@ -30,9 +30,35 @@ void     xTS_PacketHeader::Print() const {
     printf("TS: SB=%d E=%d S=%d P=%d PID=%d TSC=%d AF=%d CC=%d", SB, E, S, P, PID, TSC, AFC, CC);
 }
 
-uint8_t xTS_PacketHeader::getAFC()
+uint8_t xTS_PacketHeader::getAdaptationFieldControl() const
 {
     return AFC;
+}
+
+uint16_t xTS_PacketHeader::getPID() const
+{
+    return PID;
+}
+
+uint8_t xTS_PacketHeader::getSyncByte() const
+{
+    return SB;
+}
+
+uint8_t xTS_PacketHeader::getContinuityCounter() const
+{
+    return CC;
+}
+
+uint8_t xTS_PacketHeader::getStartIndicator() const
+{
+    return S;
+}
+
+bool xTS_PacketHeader::hasAdaptationField()const
+{
+    if (AFC == 2 || AFC == 3)return true;
+    return false;
 }
 
 

@@ -34,3 +34,8 @@ void xTS_AdaptationField::Print() const
 {
 	printf("AF: L=%d DC=%d RA=%d SP=%d PR=%d OR=%d SP=%d TP=%d EX=%d", AFL, DC, RA, SP1, PR, OR, SP2, TP, EX);
 }
+
+uint32_t xTS_AdaptationField::getNumBytes() const
+{
+	return 1+AFL;
+}
